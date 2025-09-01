@@ -1,0 +1,64 @@
+{
+  "regionData": {
+    "강남구": {
+      "errands": [
+        { "day": "월", "completed": 15, "requested": 18 },
+        { "day": "화", "completed": 18, "requested": 22 },
+        { "day": "수", "completed": 12, "requested": 16 },
+        { "day": "목", "completed": 22, "requested": 25 },
+        { "day": "금", "completed": 20, "requested": 23 },
+        { "day": "토", "completed": 14, "requested": 17 },
+        { "day": "일", "completed": 8, "requested": 11 }
+      ],
+      "revenue": [
+        { "day": "월", "revenue": 850000 },
+        { "day": "화", "revenue": 1080000 },
+        { "day": "수", "revenue": 720000 },
+        { "day": "목", "revenue": 1320000 },
+        { "day": "금", "revenue": 1200000 },
+        { "day": "토", "revenue": 840000 },
+        { "day": "일", "revenue": 480000 }
+      ]
+    },
+    "서초구": {
+      "errands": [
+        { "day": "월", "completed": 12, "requested": 15 },
+        { "day": "화", "completed": 10, "requested": 14 },
+        { "day": "수", "completed": 15, "requested": 18 },
+        { "day": "목", "completed": 18, "requested": 21 },
+        { "day": "금", "completed": 16, "requested": 19 },
+        { "day": "토", "completed": 8, "requested": 12 },
+        { "day": "일", "completed": 6, "requested": 9 }
+      ],
+      "revenue": [
+        { "day": "월", "revenue": 720000 },
+        { "day": "화", "revenue": 600000 },
+        { "day": "수", "revenue": 900000 },
+        { "day": "목", "revenue": 1080000 },
+        { "day": "금", "revenue": 960000 },
+        { "day": "토", "revenue": 480000 },
+        { "day": "일", "revenue": 360000 }
+      ]
+    },
+    "송파구": {
+      "errands": [
+        { "day": "월", "completed": 8, "requested": 12 },
+        { "day": "화", "completed": 12, "requested": 15 },
+        { "day": "수", "completed": 6, "requested": 10 },
+        { "day": "목", "completed": 15, "requested": 18 },
+        { "day": "금", "completed": 14, "requested": 17 },
+        { "day": "토", "completed": 10, "requested": 13 },
+        { "day": "일", "completed": 5, "requested": 8 }
+      ],
+      "revenue": [
+        { "day": "월", "revenue": 480000 },
+        { "day": "화", "revenue": 720000 },
+        { "day": "수", "revenue": 360000 },
+        { "day": "목", "revenue": 900000 },
+        { "day": "금", "revenue": 840000 },
+        { "day": "토", "revenue": 600000 },
+        { "day": "일", "revenue": 300000 }
+      ]
+    }
+  }
+}

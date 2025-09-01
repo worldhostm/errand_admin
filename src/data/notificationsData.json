@@ -1,0 +1,68 @@
+{
+  "notifications": [
+    {
+      "id": "1",
+      "type": "info",
+      "title": "새로운 심부름 요청",
+      "message": "강남구에서 새로운 심부름 요청이 등록되었습니다. '마트에서 장보기' 요청을 확인해보세요.",
+      "timestamp": "2025-01-14T10:30:00Z",
+      "isRead": false
+    },
+    {
+      "id": "2",
+      "type": "success",
+      "title": "심부름 완료",
+      "message": "서초구 '반려동물 산책' 심부름이 성공적으로 완료되었습니다. 고객 만족도: ⭐⭐⭐⭐⭐",
+      "timestamp": "2025-01-14T09:15:00Z",
+      "isRead": false
+    },
+    {
+      "id": "3",
+      "type": "warning",
+      "title": "결제 지연 알림",
+      "message": "송파구 '청소 서비스' 심부름의 결제가 지연되고 있습니다. 고객에게 연락이 필요합니다.",
+      "timestamp": "2025-01-14T08:45:00Z",
+      "isRead": false
+    },
+    {
+      "id": "4",
+      "type": "error",
+      "title": "심부름 취소",
+      "message": "마포구 '문서 배달' 심부름이 고객 사정으로 인해 취소되었습니다. 취소 수수료가 적용됩니다.",
+      "timestamp": "2025-01-14T07:20:00Z",
+      "isRead": true
+    },
+    {
+      "id": "5",
+      "type": "info",
+      "title": "새로운 고객 가입",
+      "message": "새로운 고객이 가입했습니다. 환영 메시지를 발송했습니다.",
+      "timestamp": "2025-01-13T18:30:00Z",
+      "isRead": true
+    },
+    {
+      "id": "6",
+      "type": "success",
+      "title": "월간 목표 달성",
+      "message": "12월 심부름 완료 목표를 달성했습니다! 🎉 총 1,250건의 심부름이 완료되었습니다.",
+      "timestamp": "2025-01-13T16:45:00Z",
+      "isRead": true
+    },
+    {
+      "id": "7",
+      "type": "warning",
+      "title": "서비스 점검 예정",
+      "message": "1월 15일 오전 2시-4시 서버 점검이 예정되어 있습니다. 서비스 이용에 참고해주세요.",
+      "timestamp": "2025-01-13T14:20:00Z",
+      "isRead": true
+    },
+    {
+      "id": "8",
+      "type": "info",
+      "title": "주간 리포트",
+      "message": "이번 주 심부름 완료율이 95%로 전주 대비 3% 상승했습니다.",
+      "timestamp": "2025-01-13T11:10:00Z",
+      "isRead": true
+    }
+  ]
+}
