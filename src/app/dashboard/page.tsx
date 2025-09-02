@@ -4,15 +4,12 @@ import {
   UserGroupIcon, 
   ClipboardDocumentListIcon, 
   BanknotesIcon,
-  ArrowTrendingUpIcon,
-  BellIcon
+  ArrowTrendingUpIcon
 } from '@heroicons/react/24/outline';
 import { useDashboardStats, useRecentErrands } from '@/hooks/useDashboard';
 import { useState } from 'react';
 import LineChart from '../_components/LineChart';
-import NotificationModal from '../_components/NotificationModal';
 import dashboardData from '@/data/dashboardData.json';
-import notificationsData from '@/data/notificationsData.json';
 
 export default function Dashboard() {
   const { stats, loading: statsLoading, error: statsError } = useDashboardStats();
@@ -21,11 +18,8 @@ export default function Dashboard() {
   const { regionData } = dashboardData;
 
   const [selectedRegion, setSelectedRegion] = useState('강남구');
-  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   
   const currentRegionData = regionData[selectedRegion as keyof typeof regionData];
-  const { notifications } = notificationsData;
-  const unreadCount = notifications.filter((n: any) => !n.isRead).length;
   
   const formatPrice = (price: number) => {
     return '₩' + price.toLocaleString('ko-KR');
@@ -109,19 +103,6 @@ export default function Dashboard() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold text-gray-900">대시보드</h1>
-        
-        {/* 알림 버튼 */}
-        <button
-          onClick={() => setIsNotificationModalOpen(true)}
-          className="relative p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-        >
-          <BellIcon className="h-6 w-6 text-gray-700" />
-          {unreadCount > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </span>
-          )}
-        </button>
       </div>
       
       {/* 통계 카드 */}
@@ -224,12 +205,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* 알림 모달 */}
-      <NotificationModal
-        isOpen={isNotificationModalOpen}
-        onClose={() => setIsNotificationModalOpen(false)}
-        notifications={notifications as any}
-      />
     </div>
   );
 }

@@ -20,6 +20,8 @@ export default function ErrandsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | ErrandStatus>('all');
   const [filterCategory, setFilterCategory] = useState<'all' | string>('all');
+  const [editingErrand, setEditingErrand] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState({ fee: 0, dueDate: '' });
 
   if (loading) {
     return (
@@ -71,6 +73,34 @@ export default function ErrandsPage() {
         console.error('Failed to delete errand:', err);
       }
     }
+  };
+
+  const handleEditClick = (errand: { id: string; fee: number; dueDate: string }) => {
+    setEditingErrand(errand.id);
+    const date = new Date(errand.dueDate);
+    const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+    setEditForm({
+      fee: errand.fee,
+      dueDate: localDate.toISOString().slice(0, 16)
+    });
+  };
+
+  const handleEditSubmit = async (errandId: string) => {
+    try {
+      const updatedData = {
+        fee: editForm.fee,
+        dueDate: new Date(editForm.dueDate).toISOString()
+      };
+      await updateErrand(errandId, updatedData);
+      setEditingErrand(null);
+    } catch (err) {
+      console.error('Failed to update errand:', err);
+    }
+  };
+
+  const handleEditCancel = () => {
+    setEditingErrand(null);
+    setEditForm({ fee: 0, dueDate: '' });
   };
 
   const getStatusColor = (status: ErrandStatus) => {
@@ -166,7 +196,10 @@ export default function ErrandsPage() {
                   <button className="text-blue-600 hover:text-blue-800 p-1">
                     <EyeIcon className="h-4 w-4" />
                   </button>
-                  <button className="text-gray-600 hover:text-gray-800 p-1">
+                  <button 
+                    onClick={() => handleEditClick(errand)}
+                    className="text-gray-600 hover:text-gray-800 p-1"
+                  >
                     <PencilIcon className="h-4 w-4" />
                   </button>
                   <button 
@@ -187,11 +220,32 @@ export default function ErrandsPage() {
                 </div>
                 <div className="flex items-center text-sm text-gray-500">
                   <ClockIcon className="h-4 w-4 mr-2" />
-                  마감: {new Date(errand.dueDate).toLocaleString('ko-KR')}
+                  {editingErrand === errand.id ? (
+                    <input
+                      type="datetime-local"
+                      value={editForm.dueDate}
+                      onChange={(e) => setEditForm(prev => ({ ...prev, dueDate: e.target.value }))}
+                      className="px-2 py-1 border border-gray-300 rounded text-xs focus:ring-1 focus:ring-blue-500"
+                    />
+                  ) : (
+                    `마감: ${new Date(errand.dueDate).toLocaleString('ko-KR')}`
+                  )}
                 </div>
                 <div className="flex items-center text-sm text-gray-900 font-medium">
                   <BanknotesIcon className="h-4 w-4 mr-2" />
-                  {formatPrice(errand.fee)}
+                  {editingErrand === errand.id ? (
+                    <div className="flex items-center gap-1">
+                      <input
+                        type="number"
+                        value={editForm.fee}
+                        onChange={(e) => setEditForm(prev => ({ ...prev, fee: Number(e.target.value) }))}
+                        className="w-20 px-2 py-1 border border-gray-300 rounded text-xs focus:ring-1 focus:ring-blue-500"
+                      />
+                      <span className="text-xs">원</span>
+                    </div>
+                  ) : (
+                    formatPrice(errand.fee)
+                  )}
                 </div>
               </div>
 
@@ -210,18 +264,35 @@ export default function ErrandsPage() {
                 </div>
               </div>
 
-              {/* 상태 변경 버튼 */}
+              {/* 수정 버튼 또는 상태 변경 */}
               <div className="mt-4 pt-4 border-t">
-                <select
-                  value={errand.status}
-                  onChange={(e) => handleStatusChange(errand.id, e.target.value as ErrandStatus)}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="waiting">대기중</option>
-                  <option value="in_progress">진행중</option>
-                  <option value="completed">완료</option>
-                  <option value="cancelled">취소됨</option>
-                </select>
+                {editingErrand === errand.id ? (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleEditSubmit(errand.id)}
+                      className="flex-1 bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700"
+                    >
+                      저장
+                    </button>
+                    <button
+                      onClick={handleEditCancel}
+                      className="flex-1 bg-gray-300 text-gray-700 px-3 py-2 text-sm rounded-lg hover:bg-gray-400"
+                    >
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  <select
+                    value={errand.status}
+                    onChange={(e) => handleStatusChange(errand.id, e.target.value as ErrandStatus)}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="waiting">대기중</option>
+                    <option value="in_progress">진행중</option>
+                    <option value="completed">완료</option>
+                    <option value="cancelled">취소됨</option>
+                  </select>
+                )}
               </div>
             </div>
           </div>
